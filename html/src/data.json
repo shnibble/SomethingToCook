@@ -1,0 +1,46 @@
+{
+    "categories": [
+        "Beef", 
+        "Chicken", 
+        "Lamb", 
+        "Pork", 
+        "Turkey" 
+    ],
+
+    "origins": [
+        "Italian", 
+        "Middle Eastern" 
+    ],
+
+    "tags": [
+        "Capers", 
+        "Ground Beef",
+        "Ground Pork", 
+        "Pasta", 
+        "Pita" 
+    ],
+
+    "meals": [
+        {
+            "name": "Shawarma", 
+            "description": "A Middle Eastern meat preparation based on the döner kebab of Ottoman Turkey.", 
+            "categories": ["Chicken", "Lamb", "Turkey", "Beef"], 
+            "origins": ["Middle Eastern"], 
+            "tags": ["Pita"] 
+        },
+        {
+            "name": "Chicken Piccata", 
+            "description": "An Italian dish of dredged chicken breast served in a lemon butter sauce with capers over pasta.", 
+            "categories": ["Chicken"], 
+            "origins": ["Italian"], 
+            "tags": ["Capers", "Pasta"] 
+        },
+        {
+            "name": "Spaghetti and Meatballs", 
+            "description": "An Italian classic served with red sauce over pasta.",
+            "categories": ["Pork", "Beef"], 
+            "origins": ["Italian"], 
+            "tags": ["Pasta", "Ground Beef", "Ground Pork"] 
+        }
+    ]
+}

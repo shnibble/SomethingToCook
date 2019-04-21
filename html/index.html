@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>What to Cook?</title>
+    <script src="/src/animation.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #f2f2f2;
+        }
+        html, body {
+            background-color: #333333;
+        }
+
+        header {
+            padding: 10px;
+            background-color: #262626; 
+            text-align: center;
+        }
+        header p {
+            font-style: italic;            
+            color: #666666;
+        }
+
+
+        main {
+            padding: 5px 5px 29px 5px;
+            text-align: center;
+        }
+        .filter {
+            padding: 10px;
+            margin: 5px auto;
+            max-width: 600px;
+        }
+        .filter h2 {
+            padding: 5px;
+        }
+        .filter ul li {
+            display: inline-block;
+            color: #595959;
+            border: 2px solid #595959;
+            border-radius: 4px;
+            margin: 2px;
+            padding: 5px;
+            cursor: pointer;
+            transition: color .25s, border-color .25s;
+        }
+        .filter ul li:focus, .filter ul li:hover {            
+            color: #bfbfbf;
+            border-color: #bfbfbf;
+            outline: none;
+        }
+        .filter ul li.active {
+            color: #cc6900;
+            border-color: #cc6900;
+        }
+        .filter ul li.active:focus, .filter ul li.active:hover {            
+            color: #ffa94d;
+            border-color: #ffa94d;
+            outline: none;
+        }
+        #filter-tags div {
+            margin: 5px 0;
+        }
+        #filter-tags div input {
+            display: none;
+        }
+
+
+        #filter-tags div input + label {
+            display: inline-block;
+            color: #595959;
+            border: 2px solid #595959;
+            border-radius: 4px;
+            margin: 2px;
+            padding: 5px;
+            cursor: pointer;
+            transition: color .25s, border-color .25s;
+        }
+        #filter-tags div input + label:focus, #filter-tags div input + label:hover {            
+            color: #bfbfbf;
+            border-color: #bfbfbf;
+            outline: none;
+        }
+        #filter-tags div input:checked + label {
+            color: #cc6900;
+            border-color: #cc6900;
+        }
+        #filter-tags div input:checked + label:focus, #filter-tags div input:checked + label:hover {            
+            color: #ffa94d;
+            border-color: #ffa94d;
+            outline: none;
+        }
+
+
+
+
+        #cook-something-btn {
+            background: #f88000;
+            color: #d9d9d9;
+            border: none;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px;
+            font-size: 22px;
+            cursor: pointer;
+            transition: box-shadow .25s, color .25s;
+        }
+        #cook-something-btn:hover, #cook-something-btn:focus {
+            box-shadow: 0 0 4px 2px rgba(0,0,0,0.5);
+            color: #fff;
+            outline: none;
+        }
+
+        /* custom alert */
+        #c_alert {
+            display: none;
+            position: fixed;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            padding: 5px;
+            box-shadow: 0 0 2px 1px rgba(0,0,0,0.25);
+            background-color: #4d4d4d;
+            text-align: center;
+            color: #f2f2f2;
+        }
+        #c_alert h1 {
+            font-size: 24px;
+        }
+        #c_alert p {
+            padding: 10px;    
+        }
+        #c_alert_close {
+            background: #f88000;
+            color: #d9d9d9;
+            border: none;
+            border-radius: 2px;
+            padding: 5px;
+            margin: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: box-shadow .25s, color .25s;
+        }
+        #c_alert_close:hover, #c_alert_close:focus {
+            box-shadow: 0 0 4px 2px rgba(0,0,0,0.5);
+            color: #fff;
+            outline: none;
+        }
+
+        footer {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 5px;
+            background-color: #262626; 
+        }
+        footer p {
+            font-size: 12px;
+            font-style: italic;
+            text-align: center;
+            color: #666666;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>SomethingToCook</h1>
+        <p>Let's figure out something to cook!</p>
+    </header>
+
+    <main>
+        <div id="filter-container">
+            <div class="filter" id="filter-categories">
+                <h2>Categories</h2>
+                <div></div>
+                <ul>
+                    Loading...
+                </ul>
+            </div>
+
+            <div class="filter" id="filter-origins">
+                <h2>Origins</h2>
+                <div></div>
+                <ul>
+                    Loading...
+                </ul>
+            </div>
+
+            <div class="filter" id="filter-tags">
+                <h2>Tags</h2>
+                <div>
+                    <span>Include: </span>
+                    <input id="tags-method-1-btn" type="radio" name="tags-method" value="any" checked>
+                        <label for="tags-method-1-btn" tabIndex="0">Any</label>
+                    <input id="tags-method-2-btn" type="radio" name="tags-method" value="all">
+                        <label for="tags-method-2-btn" tabIndex="0">All</label>
+                </div>
+                <ul>
+                    Loading...
+                </ul>
+            </div>
+        </div>
+
+        <button id="cook-something-btn" title="Find a meal!" onclick="getMeal()">Cook Something</button>
+
+        <div id="result-container">
+            <h2></h2>
+            <p></p>
+            <div></div>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <p>SomethingToCook.com | Copyright 2019</p>
+    </footer>
+
+    <script>
+        "USE STRICT";
+
+        // custom alert function
+        function c_alert(title, msg) {
+
+            // check for existing alert element and remove it
+            let oldEl = document.getElementById("c_alert");
+            if (oldEl !== null) {
+                oldEl.remove();
+            }
+
+            // create new alert element using provided title and msg variables
+            let el = document.createElement('div');
+            el.id = "c_alert";
+            el.innerHTML =
+                `<h1>${title}</h1>` +
+                `<p>${msg}</p>` +
+                `<input type="button" id="c_alert_close" onclick="slideUp(this.parentElement, 250)" value="CLOSE">`;
+
+            // append alert to document body
+            document.body.appendChild(el);
+
+            // animate slide down
+            slideDown(el, 250);
+
+        }
+
+        // update filters function
+        let categoriesFilter = [], 
+            originsFilter = [], 
+            tagsFilter = []; 
+
+        function toggleFilter(el) {
+
+            let existingIndex = null;
+            let filterType = el.dataset.type;
+            let filterName = el.innerText;
+            let existingFilter = null;
+
+            switch ( filterType ) {
+
+                case "categories":
+                    existingFilter = categoriesFilter;
+                    break;
+
+                case "origins":
+                    existingFilter = originsFilter;
+                    break;
+
+                case "tags":
+                    existingFilter = tagsFilter;
+                    break;
+
+                default:
+                    console.log("Invalid filter type.");
+                    return false;
+            }
+
+            
+            existingIndex = existingFilter.indexOf(filterName);
+            if ( existingIndex !== -1 ) {
+
+                if ( filterType === "categories" && existingFilter.length <= 1 ) {
+
+                    c_alert("Error", "You must have at least one category selected.");
+
+                } else {
+                
+                    existingFilter.splice(existingIndex, 1);
+                    el.classList.toggle("active");
+
+                }
+
+            } else {
+
+                existingFilter.push(filterName);
+                el.classList.toggle("active");
+
+            }
+
+        }
+
+        // add "active" class toggle to li click events
+        function applyListeners() {
+            let filters = document.getElementsByClassName("filter");
+            for ( let i = 0; i < filters.length; i++ ) {
+                
+                let fc = filters[i].children[2].children;
+
+                for ( let n = 0; n < fc.length; n++ ) {
+
+                    fc[n].addEventListener("click", function(){
+
+                        toggleFilter(this);
+
+                    })
+
+                }
+            }
+        }
+
+        // get function
+        function get(src) {
+
+            return new Promise(function(resolve, reject) {
+
+                let xhttp = new XMLHttpRequest();
+
+                xhttp.onreadystatechange = function() {
+
+                    if (this.readyState == 4) {
+
+                        if (this.status == 200) {
+
+                        resolve(this.responseText);
+
+                        } else {
+
+                        reject(Error(this.status));
+
+                        }
+
+                    }
+
+                }
+
+                xhttp.onerror = function() {
+
+                    reject(Error("Network Error"));
+
+                }
+
+                xhttp.open('GET', src, true);
+                xhttp.send();
+
+            });
+
+        }
+
+        // buildDOM function
+        function buildDOM(data) {
+            
+            let categoriesContainer   = document.getElementById("filter-categories"),
+                originsContainer = document.getElementById("filter-origins"),
+                tagsContainer    = document.getElementById("filter-tags");
+
+            let categoriesHTML = originsHTML = tagsHTML = "";
+
+            // build categories
+            for ( let i = 0; i < data.categories.length; i++ ) {
+
+                categoriesHTML += `<li class="active" data-type="categories" tabIndex="0">${data.categories[i]}</li>`;
+
+            }
+            categoriesContainer.children[2].innerHTML = categoriesHTML;
+
+            // build origins
+            for ( let i = 0; i < data.origins.length; i++ ) {
+
+                originsHTML += `<li class="active" data-type="origins" tabIndex="0">${data.origins[i]}</li>`;
+
+            }
+            originsContainer.children[2].innerHTML = originsHTML;
+
+            // build tags
+            for ( let i = 0; i < data.tags.length; i++ ) {
+
+                tagsHTML += `<li data-type="tags" tabIndex="0">${data.tags[i]}</li>`;
+
+            }
+            tagsContainer.children[2].innerHTML = tagsHTML;
+
+            applyListeners();
+
+        }
+
+        // get data
+        let data = {};
+        let meals = {};
+
+        get("/src/data.json").then(function(resolve){
+
+            data = JSON.parse(resolve);
+            meals = data.meals;
+
+            categoriesFilter = data.categories;
+            originsFilter = data.origins;
+
+            buildDOM(data);
+
+        }, function(error) {
+
+            c_alert("Error", error);
+
+        })
+
+
+        // check if two arrays have at least one matching value function
+        function arrayContains(arr1, arr2) {
+
+            return arr2.some(function(v) {
+
+                return arr1.indexOf(v) >= 0;
+
+            });
+
+        }
+
+        // check if all array values are in another array
+        function arrayContainsArray(superset, subset) {
+
+            if (0 === subset.length) {
+
+                return false;
+
+            }
+
+            return subset.every(function (value) {
+
+                return (superset.indexOf(value) >= 0);
+
+            });
+        }
+
+
+        // get meal function
+        function getMeal() {
+
+            let name = document.getElementById("result-container").children[0];
+            let description = document.getElementById("result-container").children[1];
+            let linksContainer = document.getElementById("result-container").children[2];
+
+            let possibleMeals = [];
+            let theFinalMeal = {};
+
+            let radios = document.getElementsByName("tags-method");
+            let filterTagMethod = "";            
+
+            for ( let n = 0; n < radios.length; n++ ) {
+
+                if ( radios[n].checked ) {
+
+                    filterTagMethod = radios[n].value;
+
+                }
+
+            }
+
+            // validate at least one category is selected
+            if ( categoriesFilter.length === 0 ) {
+
+                c_alert("Error", "There must be at least one category selected.")
+
+            } else {
+
+                for ( let i = 0; i < meals.length; i++ ) {
+
+                    // check categories
+                    if ( arrayContains(meals[i].categories, categoriesFilter) ) {
+
+                        // check origins
+                        if ( originsFilter.length <= 0 || (originsFilter.length > 0 && arrayContains(meals[i].origins, originsFilter)) ) {
+
+                            // check tags
+                            if ( tagsFilter.length > 0 ) {
+
+                                // filtering all tags
+                                if ( filterTagMethod === "all" ) {
+
+                                    if ( arrayContainsArray(meals[i].tags, tagsFilter) ) {
+
+                                        possibleMeals.push(meals[i]);
+
+                                    }
+
+                                }
+
+                                // filtering any tags
+                                if ( filterTagMethod === "any" ) {
+
+                                    if ( arrayContains(meals[i].tags, tagsFilter) ) {
+
+                                        possibleMeals.push(meals[i]);
+
+                                    }
+
+                                }
+
+
+                            } else {
+
+                                possibleMeals.push(meals[i]);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+                
+            }
+
+            // pick the final meal
+            if ( possibleMeals.length === 0 ) {
+
+                name.innerText = "Nothing?";
+                description.innerText = "No meals were found using those particular filters :( Try opening up your search a bit.";
+
+            } else {
+
+                let i = Math.floor((Math.random() * possibleMeals.length), + 0);
+                theFinalMeal = possibleMeals[i];
+                name.innerText = theFinalMeal.name;
+                description.innerText = theFinalMeal.description;
+
+                let l = document.createElement("a");
+                let url = "http://www.google.com/search?q=" + theFinalMeal.name.replace(" ", "+") + "+recipes";
+                l.href = url;
+                l.target = "_BLANK";
+                l.innerText = "Find Recipes";
+                linksContainer.innerHTML = "";
+                linksContainer.appendChild(l);
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
