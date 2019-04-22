@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>What to Cook?</title>
-    <script src="/SomethingToCook/src/animation.js"></script>
+    <script src="/src/animation.js"></script>
 
     <style>
         * {
@@ -409,7 +409,7 @@
         let data = {};
         let meals = {};
 
-        get("/SomethingToCook/src/data.json").then(function(resolve){
+        get("/src/data.json").then(function(resolve){
 
             data = JSON.parse(resolve);
             meals = data.meals;
@@ -537,6 +537,7 @@
 
                 name.innerText = "Nothing?";
                 description.innerText = "No meals were found using those particular filters :( Try opening up your search a bit.";
+                linksContainer.innerHTML = "";
 
             } else {
 
