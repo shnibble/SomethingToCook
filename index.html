@@ -113,6 +113,13 @@
         }
         #result-container p {
             padding: 5px;
+            text-align: left;
+        }
+        .wikipedia-link {
+            color: #8c8c8c;
+        }
+        .wikipedia-link:hover, .wikipedia-link:focus {
+            color: #fff;
         }
         .search-recipe {
             display: block;
@@ -618,7 +625,6 @@
                 let i = Math.floor((Math.random() * possibleMeals.length), + 0);
                 theFinalMeal = possibleMeals[i];
                 name.innerText = theFinalMeal.name;
-                description.innerText = theFinalMeal.description;
 
                 let l = document.createElement("a");
                 let url = `http://www.google.com/search?q=${theFinalMeal.name.replace(" ", "+")}+recipe`;
@@ -628,6 +634,30 @@
                 l.innerText = `Find "${theFinalMeal.name}" Recipes`;
                 linksContainer.innerHTML = "";
                 linksContainer.appendChild(l);
+
+                // wikipedia testing
+                let fetchTitle = theFinalMeal.wikipedia.split("/");
+                fetchTitle = fetchTitle[fetchTitle.length-1];
+                let fetchUrl =  "https://en.wikipedia.org/w/api.php?format=json&action=query&origin=*&prop=extracts&exintro&explaintext&redirects=1&titles=" + fetchTitle;
+                fetch(
+                    fetchUrl,
+                {
+                    method: "GET"
+                }
+                )
+                .then(response => response.json())
+                .then(json => {
+
+                    let key = Object.keys(json.query.pages)[0];
+                    let extract = json.query.pages[key].extract;
+                    description.innerHTML = `${extract} <a class="wikipedia-link" href="${theFinalMeal.wikipedia}" target="_BLANK">[linked from Wikipedia]</a>`;
+
+                })
+                .catch(error => {
+
+                    c_alert(error.message);
+
+                });
 
                 if ( theFinalMeal.categories.length > 1 ) {
 
