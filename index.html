@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>What to Cook?</title>
+    <title>Something to Cook</title>
     <script src="/src/animation.js"></script>
 
     <style>
@@ -29,7 +29,6 @@
             color: #666666;
         }
 
-
         main {
             padding: 5px 5px 29px 5px;
             text-align: center;
@@ -38,9 +37,10 @@
             padding: 10px;
             margin: 5px auto;
             max-width: 600px;
+            border-bottom: 2px solid rgba(166, 166, 166, 0.25);
         }
-        .filter h2 {
-            padding: 5px;
+        .filter div {
+            padding: 8px;
         }
         .filter ul li {
             display: inline-block;
@@ -72,8 +72,6 @@
         #filter-tags div input {
             display: none;
         }
-
-
         #filter-tags div input + label {
             display: inline-block;
             color: #595959;
@@ -90,17 +88,37 @@
             outline: none;
         }
         #filter-tags div input:checked + label {
-            color: #cc6900;
-            border-color: #cc6900;
+            color: #009933;
+            border-color: #009933;
         }
         #filter-tags div input:checked + label:focus, #filter-tags div input:checked + label:hover {            
-            color: #ffa94d;
-            border-color: #ffa94d;
+            color: #00cc44;
+            border-color: #00cc44;
             outline: none;
         }
 
-
-
+        #result-container {
+            display: none;
+            padding: 10px;
+            margin: 5px auto;
+            max-width: 600px;
+            background-color: rgba(0, 230, 70, 0.05);
+            border-bottom: 2px solid #009933;
+        }
+        #result-container h2 {
+            padding: 5px;
+        }
+        #result-container p {
+            padding: 5px;
+        }
+        #result-container a {
+            display: block;
+            margin-top: 20px;
+            transition: color .25s;
+        }
+        #result-container a:hover, #result-container a:focus {
+            color: #f88000;
+        }
 
         #cook-something-btn {
             background: #f88000;
@@ -119,7 +137,6 @@
             outline: none;
         }
 
-        /* custom alert */
         #c_alert {
             display: none;
             position: fixed;
@@ -176,15 +193,17 @@
 <body>
 
     <header>
-        <h1>SomethingToCook</h1>
-        <p>Let's figure out something to cook!</p>
+        <h1>Something To Cook</h1>
+        <p>Pick some options below and lets help you decide on something to cook.</p>
     </header>
 
     <main>
         <div id="filter-container">
             <div class="filter" id="filter-categories">
                 <h2>Categories</h2>
-                <div></div>
+                <div>
+                    <span>What the dish is really focused on or primarily centered around.</span>
+                </div>
                 <ul>
                     Loading...
                 </ul>
@@ -192,7 +211,9 @@
 
             <div class="filter" id="filter-origins">
                 <h2>Origins</h2>
-                <div></div>
+                <div>
+                    <span>From what part of the world the dish originated or became popular.</span>
+                </div>
                 <ul>
                     Loading...
                 </ul>
@@ -201,11 +222,13 @@
             <div class="filter" id="filter-tags">
                 <h2>Tags</h2>
                 <div>
-                    <span>Include: </span>
+                    <span>Include meals with</span>
                     <input id="tags-method-1-btn" type="radio" name="tags-method" value="any" checked>
                         <label for="tags-method-1-btn" tabIndex="0">Any</label>
+                    <span> of these tags or include only meals with</span>
                     <input id="tags-method-2-btn" type="radio" name="tags-method" value="all">
                         <label for="tags-method-2-btn" tabIndex="0">All</label>
+                    <span>of these tags.</span>
                 </div>
                 <ul>
                     Loading...
@@ -225,7 +248,7 @@
     </main>
 
     <footer>
-        <p>SomethingToCook.com | Copyright 2019</p>
+        <p>SomethingToCook.com | Copyright 2019 | Hosted on <a href="https://github.com/shnibble/SomethingToCook">Github</a></p>
     </footer>
 
     <script>
@@ -458,6 +481,7 @@
         function getMeal() {
 
             let name = document.getElementById("result-container").children[0];
+            let resultContainer = document.getElementById("result-container");
             let description = document.getElementById("result-container").children[1];
             let linksContainer = document.getElementById("result-container").children[2];
 
@@ -465,7 +489,9 @@
             let theFinalMeal = {};
 
             let radios = document.getElementsByName("tags-method");
-            let filterTagMethod = "";            
+            let filterTagMethod = "";
+
+            resultContainer.style.display = "none";
 
             for ( let n = 0; n < radios.length; n++ ) {
 
@@ -550,11 +576,12 @@
                 let url = "http://www.google.com/search?q=" + theFinalMeal.name.replace(" ", "+") + "+recipes";
                 l.href = url;
                 l.target = "_BLANK";
-                l.innerText = "Find Recipes";
+                l.innerText = "Search for Some Recipes";
                 linksContainer.innerHTML = "";
                 linksContainer.appendChild(l);
 
             }
+            slideDown(resultContainer, 500);
 
         }
     </script>
