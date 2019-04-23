@@ -97,6 +97,9 @@
             outline: none;
         }
 
+        #result {
+            min-height: 350px;
+        }
         #result-container {
             display: none;
             padding: 10px;
@@ -111,13 +114,20 @@
         #result-container p {
             padding: 5px;
         }
-        #result-container a {
+        .search-recipe {
             display: block;
-            margin-top: 20px;
+            margin: 10px;
+            color: #f88000;
             transition: color .25s;
         }
-        #result-container a:hover, #result-container a:focus {
+        .search-recipe-variation {
+            display: inline-block;
+            margin: 10px;
             color: #f88000;
+            transition: color .25s;
+        }
+        .search-recipe:hover, .search-recipe:focus, .search-recipe-variation:hover, .search-recipe-variation:focus {
+            color: #ffa94d;
         }
 
         #cook-something-btn {
@@ -224,10 +234,10 @@
                 <div>
                     <span>Include meals with</span>
                     <input id="tags-method-1-btn" type="radio" name="tags-method" value="any" checked>
-                        <label for="tags-method-1-btn" tabIndex="0">Any</label>
+                        <label id="tags-method-1-label" for="tags-method-1-btn" tabIndex="0">Any</label>
                     <span> of these tags or include only meals with</span>
                     <input id="tags-method-2-btn" type="radio" name="tags-method" value="all">
-                        <label for="tags-method-2-btn" tabIndex="0">All</label>
+                        <label id="tags-method-2-label" for="tags-method-2-btn" tabIndex="0">All</label>
                     <span>of these tags.</span>
                 </div>
                 <ul>
@@ -238,17 +248,19 @@
 
         <button id="cook-something-btn" title="Find a meal!" onclick="getMeal()">Cook Something</button>
 
-        <div id="result-container">
-            <h2></h2>
-            <p></p>
-            <div></div>
+        <div id="result">
+            <div id="result-container">
+                <h2></h2>
+                <p></p>
+                <div></div>
+            </div>
         </div>
 
 
     </main>
 
     <footer>
-        <p>SomethingToCook.com | Copyright 2019 | Hosted on <a href="https://github.com/shnibble/SomethingToCook">Github</a></p>
+        <p>somethnigtocook.com | Copyright &copy; 2019 | Hosted on <a href="https://github.com/shnibble/SomethingToCook">Github</a></p>
     </footer>
 
     <script>
@@ -346,12 +358,48 @@
                     fc[n].addEventListener("click", function(){
 
                         toggleFilter(this);
+                        this.blur();
+
+                    })
+
+                    fc[n].addEventListener("keydown", function(event){
+
+                        if ( event.keyCode == 13 || event.keyCode == 32 ) {
+                        
+                            toggleFilter(this);
+                            this.blur();
+
+                        }
 
                     })
 
                 }
             }
         }
+        
+        // add keyboard support for tag method radio buttons
+        document.getElementById("tags-method-1-label").addEventListener("keydown", function(event){
+            
+            if ( event.keyCode == 13 || event.keyCode == 32 ) {
+                
+                this.blur();
+                this.click();
+                console.log("Test 1");
+
+            }
+
+        })
+        document.getElementById("tags-method-2-label").addEventListener("keydown", function(event){
+            
+            if ( event.keyCode == 13 || event.keyCode == 32 ) {
+                
+                this.blur();
+                this.click();
+                console.log("Test 2");
+
+            }
+
+        })
 
         // get function
         function get(src) {
@@ -561,8 +609,8 @@
             // pick the final meal
             if ( possibleMeals.length === 0 ) {
 
-                name.innerText = "Nothing?";
-                description.innerText = "No meals were found using those particular filters :( Try opening up your search a bit.";
+                name.innerText = "Just Order Takeout";
+                description.innerHTML = "<p>No meals were found using those particular filters :(</p><p>Try opening up your search a bit or <a href='https://github.com/shnibble/SomethingToCook#contributing' target='_BLANK'>contribute</a> more recipes to the repository.</p>";
                 linksContainer.innerHTML = "";
 
             } else {
@@ -573,12 +621,33 @@
                 description.innerText = theFinalMeal.description;
 
                 let l = document.createElement("a");
-                let url = "http://www.google.com/search?q=" + theFinalMeal.name.replace(" ", "+") + "+recipes";
+                let url = `http://www.google.com/search?q=${theFinalMeal.name.replace(" ", "+")}+recipe`;
                 l.href = url;
+                l.className = "search-recipe"
                 l.target = "_BLANK";
-                l.innerText = "Search for Some Recipes";
+                l.innerText = `Find "${theFinalMeal.name}" Recipes`;
                 linksContainer.innerHTML = "";
                 linksContainer.appendChild(l);
+
+                if ( theFinalMeal.categories.length > 1 ) {
+
+                    let h = document.createElement("h3");
+                    h.innerText = "Variations:"
+                    linksContainer.appendChild(h);
+
+                    for (let n = 0; n < theFinalMeal.categories.length; n++ ) {
+
+                        let c = document.createElement("a");
+                        let url = "http://www.google.com/search?q=" + theFinalMeal.categories[n].replace(" ", "+") + "+" + theFinalMeal.name.replace(" ", "+") + "+recipe";
+                        c.href = url;
+                        c.className = "search-recipe-variation"
+                        c.target = "_BLANK";
+                        c.innerText = theFinalMeal.categories[n];
+                        linksContainer.appendChild(c);
+
+                    }
+
+                }
 
             }
             slideDown(resultContainer, 500);

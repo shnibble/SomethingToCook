@@ -4,20 +4,30 @@
         "Chicken", 
         "Lamb", 
         "Pork", 
-        "Turkey" 
+        "Sausage",
+        "Seafood",
+        "Turkey",
+        "Veal",
+        "Vegetarian"
     ],
 
     "origins": [
+        "Belgian", 
+        "German", 
         "Italian", 
-        "Middle Eastern" 
+        "Mexican",
+        "Middle Eastern",
+        "Scandinavian"
     ],
 
     "tags": [
         "Capers", 
-        "Ground Beef",
-        "Ground Pork", 
+        "Ground Meat", 
         "Pasta", 
-        "Pita" 
+        "Peppers",
+        "Pita",
+        "Tomato Sauce",
+        "Tortillas"
     ],
 
     "meals": [
@@ -36,11 +46,39 @@
             "tags": ["Capers", "Pasta"] 
         },
         {
-            "name": "Spaghetti and Meatballs", 
-            "description": "An Italian classic served with red sauce over pasta.",
+            "name": "Meatballs", 
+            "description": "An Italian classic served with tomato sauce over pasta.",
             "categories": ["Pork", "Beef"], 
             "origins": ["Italian"], 
-            "tags": ["Pasta", "Ground Beef", "Ground Pork"] 
+            "tags": ["Pasta", "Ground Meat", "Tomato Sauce"] 
+        },
+        {
+            "name": "Meatloaf", 
+            "description": "Meatloaf is a dish of ground meat that has been mixed with other ingredients and formed into the shape of a loaf, then baked or smoked. The final shape is either hand-formed on a flat pan or created by cooking it in a loaf pan. It is usually made with ground beef, although ground lamb, pork, veal, venison, poultry and seafood are also used.",
+            "categories": ["Beef", "Lamb", "Pork", "Veal", "Venison", "Chicken"], 
+            "origins": ["German", "Scandinavian", "Belgian"], 
+            "tags": ["Ground Meat"] 
+        },
+        {
+            "name": "Sausage and Peppers", 
+            "description": "Sausage and peppers is a dish in Italian-American cuisine prepared using Italian sausage and peppers (such as bell peppers) as primary ingredients. It is served as a dish on its own, sometimes with the use of additional ingredients such as tomato sauce, onions and pasta, and is sometimes served in the form of a sandwich.",
+            "categories": ["Sausage"], 
+            "origins": ["Italian"], 
+            "tags": ["Peppers", "Pasta", "Tomato Sauce"] 
+        },
+        {
+            "name": "Tacos", 
+            "description": "A taco is a traditional Mexican dish consisting of a corn or wheat tortilla folded or rolled around a filling. A taco can be made with a variety of fillings, including beef, pork, chicken, seafood, vegetables, and cheese, allowing great versatility and variety.",
+            "categories": ["Beef", "Pork", "Chicken", "Seafood", "Vegetarian"], 
+            "origins": ["Mexican"], 
+            "tags": ["Tortillas", "Ground Meat"] 
+        },
+        {
+            "name": "", 
+            "description": "",
+            "categories": [""], 
+            "origins": [""], 
+            "tags": [""] 
         }
     ]
 }
