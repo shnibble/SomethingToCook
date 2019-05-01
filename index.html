@@ -39,27 +39,30 @@
             text-align: center;
         }
         .filter {
-            padding: 10px;
-            margin: 5px auto;
-            max-width: 600px;
-            border-bottom: 2px solid rgba(166, 166, 166, 0.25);
+            padding: 0;
+            margin: 25px auto;
+            padding-bottom: 4px;
+            max-width: 580px;
+            border-bottom: 2px solid #737373;
         }
         .filter div {
             padding: 8px;
         }
         .filter ul li {
             display: inline-block;
+            width: 100px;
+            font-size: 12px;
             color: #595959;
             border: 2px solid #595959;
-            border-radius: 4px;
-            margin: 2px;
-            padding: 5px;
+            border-radius: 0;
+            margin: 1px;
+            padding: 10px 5px;
             cursor: pointer;
             transition: color .25s, border-color .25s;
         }
         .filter ul li:focus, .filter ul li:hover {            
-            color: #bfbfbf;
-            border-color: #bfbfbf;
+            color: #808080;
+            border-color: #808080;
             outline: none;
         }
         .filter ul li.active {
@@ -67,9 +70,20 @@
             border-color: #cc6900;
         }
         .filter ul li.active:focus, .filter ul li.active:hover {            
-            color: #ffa94d;
-            border-color: #ffa94d;
+            color: #ff901a;
+            border-color: #ff901a;
             outline: none;
+        }
+        .filter ul li.placeholder {
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            border-top: none;
+            border-bottom: none;
+            opacity: 0;
+            cursor: default;
+            pointer-events: none;
         }
         #filter-tags div {
             margin: 5px 0;
@@ -81,82 +95,111 @@
             display: inline-block;
             color: #595959;
             border: 2px solid #595959;
-            border-radius: 4px;
+            border-radius: 1px;
             margin: 2px;
             padding: 5px;
             cursor: pointer;
             transition: color .25s, border-color .25s;
         }
         #filter-tags div input + label:focus, #filter-tags div input + label:hover {            
-            color: #bfbfbf;
-            border-color: #bfbfbf;
+            color: #808080;
+            border-color: #808080;
             outline: none;
         }
         #filter-tags div input:checked + label {
-            color: #009933;
-            border-color: #009933;
+            color: #cc6900;
+            border-color: #cc6900;
         }
         #filter-tags div input:checked + label:focus, #filter-tags div input:checked + label:hover {            
-            color: #00cc44;
-            border-color: #00cc44;
+            color: #ff901a;
+            border-color: #ff901a;
             outline: none;
-        }
-
-        #result {
-            min-height: 350px;
-        }
-        #result-container {
-            display: none;
-            padding: 10px;
-            margin: 5px auto;
-            max-width: 600px;
-            background-color: rgba(0, 230, 70, 0.05);
-            border-bottom: 2px solid #009933;
-        }
-        #result-container h2 {
-            padding: 5px;
-        }
-        #result-container p {
-            padding: 5px;
-            text-align: left;
-        }
-        .wikipedia-link {
-            color: #8c8c8c;
-        }
-        .wikipedia-link:hover, .wikipedia-link:focus {
-            color: #fff;
-        }
-        .search-recipe {
-            display: block;
-            margin: 10px;
-            color: #f88000;
-            transition: color .25s;
-        }
-        .search-recipe-variation {
-            display: inline-block;
-            margin: 10px;
-            color: #f88000;
-            transition: color .25s;
-        }
-        .search-recipe:hover, .search-recipe:focus, .search-recipe-variation:hover, .search-recipe-variation:focus {
-            color: #ffa94d;
         }
 
         #cook-something-btn {
-            background: #f88000;
-            color: #d9d9d9;
+            display: block;
+            background: #00cc00;
+            color: #006600;
             border: none;
-            border-radius: 4px;
+            border-radius: 1px;
             padding: 15px;
-            margin: 10px;
-            font-size: 22px;
+            width: 100%;
+            max-width: 580px;
+            margin: 10px auto;
+            font-size: 28px;
             cursor: pointer;
-            transition: box-shadow .25s, color .25s;
+            transition: background-color .25s, color .25s;
         }
         #cook-something-btn:hover, #cook-something-btn:focus {
-            box-shadow: 0 0 4px 2px rgba(0,0,0,0.5);
-            color: #fff;
+            background-color: #33ff33;
+            color: #000;
             outline: none;
+        }
+
+        #result-container {
+            min-height: 800px;
+        }
+        #result {
+            display: none;
+            padding: 10px;
+            margin: 25px auto;
+            max-width: 560px;
+            background-color: #fff;
+            border-radius: 2px;
+        }
+        #result-name {
+            font-size: 34px;
+            color: #000;
+        }
+        #result-description {
+            margin-top: 10px;
+            height: 200px;
+            overflow-y: auto;
+            text-align: justify;
+        }
+        #result-description p {
+            color: #000;            
+        }
+        #result-source {
+            text-align: center;
+            color: #000;     
+        }
+        #result-source a {
+            color: #000; 
+        }  
+        #result-source a:hover, #result-source a:focus  {
+            color: #0059b3; 
+        }  
+        #result-source:before {
+            content: 'Source: ';
+            font-size: 14px;
+            color: #000;     
+        }
+        #result-search-container {
+            margin-top: 50px;
+        }
+        #result-search-container a {
+            display: block;
+            border: 1px solid #d9d9d9;
+            border-radius: 25px;
+            padding: 15px;
+            background-color: #fff;
+            color: #000; 
+            transition: box-shadow .25s;
+        }
+        #result-search-container a:hover, #result-search-container a:focus {
+            box-shadow: 0 0 6px 0px rgba(0,0,0,0.25); 
+        }
+        #result-search-variations-container {
+            margin-top: 25px;
+        }
+        #result-search-variations-container h4 {
+            color: #000;  
+            padding: 5px;
+        }
+        #result-search-variations-container a {
+            display: inline-block;
+            margin: 2px;
         }
 
         #c_alert {
@@ -244,12 +287,12 @@
             <div class="filter" id="filter-tags">
                 <h2>Tags</h2>
                 <div>
-                    <span>Include meals with</span>
+                    <span>Find meals with</span>
                     <input id="tags-method-1-btn" type="radio" name="tags-method" value="any" checked>
-                        <label id="tags-method-1-label" for="tags-method-1-btn" tabIndex="0">Any</label>
-                    <span> of these tags or include only meals with</span>
+                        <label id="tags-method-1-label" for="tags-method-1-btn" tabIndex="0">ANY</label>
+                    <span> of these tags or</span>
                     <input id="tags-method-2-btn" type="radio" name="tags-method" value="all">
-                        <label id="tags-method-2-label" for="tags-method-2-btn" tabIndex="0">All</label>
+                        <label id="tags-method-2-label" for="tags-method-2-btn" tabIndex="0">ALL</label>
                     <span>of these tags.</span>
                 </div>
                 <ul>
@@ -260,11 +303,21 @@
 
         <button id="cook-something-btn" title="Find a meal!" onclick="getMeal()">Cook Something</button>
 
-        <div id="result">
-            <div id="result-container">
-                <h2></h2>
-                <p></p>
-                <div></div>
+        <div id="result-container">
+            <div id="result">
+                <h2 id="result-name">Chili</h2>
+                <div id="result-description">                    
+                    <p>Chili con carne or chilli con carne (/ˈtʃili koŋ ˈkaɾne/), meaning "chili with meat" and sometimes known as simply "chili" or "chilli", is a spicy stew containing chili peppers, meat (usually beef), and often tomatoes and beans. Other seasonings may include garlic, onions, and cumin. Geographic and personal tastes involve different types of meat and ingredients. Recipes provoke disputes among aficionados, some of whom insist that the word "chili" applies only to the basic dish, without beans and tomatoes. Chili con carne is a frequent dish for cook-offs and is used as an ingredient in other dishes.</p>
+                </div>
+                <h3 id="result-source"><a href="https://en.wikipedia.org/wiki/Chili_con_carne" target="_BLANK">Wikipedia</a></h3>
+                <div id="result-search-container">
+                    <div id="result-search"></div>
+                    <div id="result-search-variations-container">
+                        <h4>Search Variations</h4>
+                        <div id="result-search-variations">
+                        </div>                 
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -272,9 +325,10 @@
     </main>
 
     <footer>
-        <p>somethnigtocook.com | Copyright &copy; 2019 | Hosted on <a href="https://github.com/shnibble/SomethingToCook">Github</a></p>
+        <p>somethnigtocook.com &copy; | Hosted on <a href="https://github.com/shnibble/SomethingToCook">Github</a></p>
     </footer>
 
+    <script src="/src/functions.js"></script>
     <script>
         "USE STRICT";
 
@@ -465,8 +519,9 @@
 
                 categoriesHTML += `<li class="active" data-type="categories" tabIndex="0">${data.categories[i]}</li>`;
 
+                
             }
-            categoriesContainer.children[2].innerHTML = categoriesHTML;
+            categoriesContainer.children[2].innerHTML = addPlaceholderListElements(categoriesHTML, data.categories.length, 5);
 
             // build origins
             for ( let i = 0; i < data.origins.length; i++ ) {
@@ -474,7 +529,7 @@
                 originsHTML += `<li class="active" data-type="origins" tabIndex="0">${data.origins[i]}</li>`;
 
             }
-            originsContainer.children[2].innerHTML = originsHTML;
+            originsContainer.children[2].innerHTML = addPlaceholderListElements(originsHTML, data.origins.length, 5);
 
             // build tags
             for ( let i = 0; i < data.tags.length; i++ ) {
@@ -482,7 +537,7 @@
                 tagsHTML += `<li data-type="tags" tabIndex="0">${data.tags[i]}</li>`;
 
             }
-            tagsContainer.children[2].innerHTML = tagsHTML;
+            tagsContainer.children[2].innerHTML = addPlaceholderListElements(tagsHTML, data.tags.length, 5);
 
             applyListeners();
 
@@ -540,10 +595,19 @@
         // get meal function
         function getMeal() {
 
-            let name = document.getElementById("result-container").children[0];
-            let resultContainer = document.getElementById("result-container");
-            let description = document.getElementById("result-container").children[1];
-            let linksContainer = document.getElementById("result-container").children[2];
+            let result = document.getElementById("result");
+            let resultName = document.getElementById("result-name");
+            let resultDescription = document.getElementById("result-description");
+            let resultSource = document.getElementById("result-source");
+            let resultSearch = document.getElementById("result-search");
+            let resultSearchVariationsContainer = document.getElementById("result-search-variations-container");
+            let resultSearchVariations = document.getElementById("result-search-variations");
+
+            resultName.innerHTML = "";
+            resultDescription.innerHTML = "";
+            resultSearch.innerHTML = "";
+            resultSearchVariationsContainer.style.display = "none";
+            resultSearchVariations.innerHTML = "";
 
             let possibleMeals = [];
             let theFinalMeal = {};
@@ -551,7 +615,7 @@
             let radios = document.getElementsByName("tags-method");
             let filterTagMethod = "";
 
-            resultContainer.style.display = "none";
+            result.style.display = "none";
 
             for ( let n = 0; n < radios.length; n++ ) {
 
@@ -621,15 +685,14 @@
             // pick the final meal
             if ( possibleMeals.length === 0 ) {
 
-                name.innerText = "Just Order Takeout";
-                description.innerHTML = "<p>No meals were found using those particular filters :(</p><p>Try opening up your search a bit or <a href='https://github.com/shnibble/SomethingToCook#contributing' target='_BLANK'>contribute</a> more recipes to the repository.</p>";
-                linksContainer.innerHTML = "";
+                resultName.innerText = "Just Order Takeout";
+                resultDescription.innerHTML = "<p>No meals were found using those particular filters :(</p><p>Try opening up your search a bit or <a href='https://github.com/shnibble/SomethingToCook#contributing' target='_BLANK'>contribute</a> more recipes to the repository.</p>";
 
             } else {
 
                 let i = Math.floor((Math.random() * possibleMeals.length), + 0);
                 theFinalMeal = possibleMeals[i];
-                name.innerText = theFinalMeal.name;
+                resultName.innerText = theFinalMeal.name;
 
                 let l = document.createElement("a");
                 let url = `http://www.google.com/search?q=${theFinalMeal.name.replace(" ", "+")}+recipe`;
@@ -637,55 +700,59 @@
                 l.className = "search-recipe"
                 l.target = "_BLANK";
                 l.innerText = `Find "${theFinalMeal.name}" Recipes`;
-                linksContainer.innerHTML = "";
-                linksContainer.appendChild(l);
+                resultSearch.appendChild(l);
 
-                // wikipedia testing
-                let fetchTitle = theFinalMeal.wikipedia.split("/");
-                fetchTitle = fetchTitle[fetchTitle.length-1];
-                let fetchUrl =  "https://en.wikipedia.org/w/api.php?format=json&action=query&origin=*&prop=extracts&exintro&explaintext&redirects=1&titles=" + fetchTitle;
-                fetch(
-                    fetchUrl,
-                {
-                    method: "GET"
+                // description
+                if ( theFinalMeal.source === "wikipedia" ) {
+
+                    let fetchTitle = theFinalMeal.description.split("/");
+                    fetchTitle = fetchTitle[fetchTitle.length-1];
+                    let fetchUrl =  "https://en.wikipedia.org/w/api.php?format=json&action=query&origin=*&prop=extracts&exintro&explaintext&redirects=1&titles=" + fetchTitle;
+                    fetch(
+                        fetchUrl,
+                    {
+                        method: "GET"
+                    }
+                    )
+                    .then(response => response.json())
+                    .then(json => {
+
+                        let key = Object.keys(json.query.pages)[0];
+                        let extract = json.query.pages[key].extract;
+                        resultDescription.innerHTML = `<p>${extract}</p>`;
+
+                    })
+                    .catch(error => {
+
+                        c_alert(error.message);
+
+                    });
+
+                } else if ( theFinalMeal.source === "none" ) {
+
+                    resultDescription.innerHTML = theFinalMeal.description;
+
                 }
-                )
-                .then(response => response.json())
-                .then(json => {
 
-                    let key = Object.keys(json.query.pages)[0];
-                    let extract = json.query.pages[key].extract;
-                    description.innerHTML = `${extract} <a class="wikipedia-link" href="${theFinalMeal.wikipedia}" target="_BLANK">[linked from Wikipedia]</a>`;
+                if ( theFinalMeal.variations.length > 0 ) {
 
-                })
-                .catch(error => {
-
-                    c_alert(error.message);
-
-                });
-
-                if ( theFinalMeal.categories.length > 1 ) {
-
-                    let h = document.createElement("h3");
-                    h.innerText = "Variations:"
-                    linksContainer.appendChild(h);
-
-                    for (let n = 0; n < theFinalMeal.categories.length; n++ ) {
+                    for (let n = 0; n < theFinalMeal.variations.length; n++ ) {
 
                         let c = document.createElement("a");
-                        let url = "http://www.google.com/search?q=" + theFinalMeal.categories[n].replace(" ", "+") + "+" + theFinalMeal.name.replace(" ", "+") + "+recipe";
+                        let url = "http://www.google.com/search?q=" + theFinalMeal.variations[n].replace(" ", "+") + "+" + theFinalMeal.name.replace(" ", "+") + "+recipe";
                         c.href = url;
                         c.className = "search-recipe-variation"
                         c.target = "_BLANK";
-                        c.innerText = theFinalMeal.categories[n];
-                        linksContainer.appendChild(c);
+                        c.innerText = theFinalMeal.variations[n];
+                        resultSearchVariations.appendChild(c);
 
                     }
+                    resultSearchVariationsContainer.style.display = "block";
 
                 }
 
             }
-            slideDown(resultContainer, 500);
+            slideDown(result, 500);
 
         }
     </script>

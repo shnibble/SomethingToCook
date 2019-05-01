@@ -1,31 +1,47 @@
 {
     "categories": [
-        "Beef", 
-        "Chicken", 
-        "Lamb", 
-        "Pork", 
-        "Sausage",
-        "Seafood",
-        "Turkey",
-        "Veal",
-        "Vegetarian"
+        "Dough",
+        "Fish",
+        "Handheld",
+        "Meat", 
+        "Noodles",
+        "Pasta",
+        "Rice",
+        "Sauce", 
+        "Salad",
+        "Sandwich",
+        "Shellfish",
+        "Soup",
+        "Stew",
+        "Vegetable"
     ],
 
     "origins": [
+        "American",
         "Belgian", 
-        "German", 
-        "Italian", 
-        "Mexican",
+        "German",
+        "Indian", 
+        "Italian",
+        "Korean", 
+        "Mexican", 
         "Middle Eastern",
-        "Scandinavian"
+        "Scandinavian",
+        "Thai"
     ],
 
     "tags": [
+        "Butter",
         "Capers", 
-        "Ground Meat", 
-        "Pasta", 
+        "Cheese",
+        "Ground Meat",
+        "Guacamole",
+        "Lemon",
         "Peppers",
         "Pita",
+        "Rice Noodles",
+        "Salsa",
+        "Spicy",
+        "Stir-fry",
         "Tomato Sauce",
         "Tortillas"
     ],
@@ -33,52 +49,138 @@
     "meals": [
         {
             "name": "Shawarma", 
-            "wikipedia": "https://en.wikipedia.org/wiki/Shawarma",
-            "categories": ["Chicken", "Lamb", "Turkey", "Beef"], 
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Shawarma",
+            "categories": ["Meat"], 
             "origins": ["Middle Eastern"], 
-            "tags": ["Pita"] 
+            "tags": ["Pita", "Kebab"],
+            "variations": ["Lamb", "Mutton", "Chicken", "Turkey", "Beef", "Veal"]
         },
         {
-            "name": "Chicken Piccata", 
-            "wikipedia": "https://en.wikipedia.org/wiki/Piccata",
-            "categories": ["Chicken"], 
+            "name": "Piccata", 
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Piccata",
+            "categories": ["Meat", "Fish"], 
             "origins": ["Italian"], 
-            "tags": ["Capers", "Pasta"] 
+            "tags": ["Capers", "Lemon", "Butter"],
+            "variations": ["Chicken", "Veal", "Fish"]
         },
         {
-            "name": "Meatballs", 
-            "wikipedia": "https://en.wikipedia.org/wiki/Meatballs",
-            "categories": ["Pork", "Beef"], 
+            "name": "Spaghetti with Meatballs",  
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Spaghetti_with_meatballs",
+            "categories": ["Meat", "Pasta"], 
             "origins": ["Italian"], 
-            "tags": ["Pasta", "Ground Meat", "Tomato Sauce"] 
+            "tags": ["Ground Meat", "Tomato Sauce"],
+            "variations": ["Turkey", "Chicken", "Fishballs", "Vegetarian", "Vegan"]
         },
         {
-            "name": "Meatloaf", 
-            "wikipedia": "https://en.wikipedia.org/wiki/Meatloaf",
-           "categories": ["Beef", "Lamb", "Pork", "Veal", "Venison", "Chicken"], 
-            "origins": ["German", "Scandinavian", "Belgian"], 
-            "tags": ["Ground Meat"] 
+            "name": "Meatloaf",  
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Meatloaf",
+           "categories": ["Meat"], 
+            "origins": ["German", "Scandinavian", "Belgian", "American"], 
+            "tags": ["Ground Meat"],
+            "variations": ["Lamb", "Pork", "Veal", "Venison", "Chicken", "Seafood", "Vegetarian", "Vegan"]
         },
         {
-            "name": "Sausage and Peppers", 
-            "wikipedia": "https://en.wikipedia.org/wiki/Sausage_and_peppers",
-            "categories": ["Sausage"], 
+            "name": "Sausage and Peppers",  
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Sausage_and_peppers",
+            "categories": ["Meat"], 
             "origins": ["Italian"], 
-            "tags": ["Peppers", "Pasta", "Tomato Sauce"] 
+            "tags": ["Peppers", "Tomato Sauce", "Spicy"],
+            "variations": ["Turkey", "Sandwich"]
         },
         {
-            "name": "Tacos", 
-            "wikipedia": "https://en.wikipedia.org/wiki/Taco",
-            "categories": ["Beef", "Pork", "Chicken", "Seafood", "Vegetarian"], 
+            "name": "Taco",  
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Taco",
+            "categories": ["Handheld"], 
             "origins": ["Mexican"], 
-            "tags": ["Tortillas", "Ground Meat"] 
+            "tags": ["Tortillas", "Ground Meat", "Salsa", "Guacamole", "Spicy"],
+            "variations": ["Beef", "Pork", "Chicken", "Seafood", "Vegetable", "Cheese", "Vegetarian", "Vegan"]
+        },
+        {
+            "name": "Bulgogi",  
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Bulgogi",
+            "categories": ["Meat"], 
+            "origins": ["Korean"], 
+            "tags": ["Stir-fry"],
+            "variations": ["Beef", "Pork"]
+        },
+        {
+            "name": "Curry",  
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Curry",
+            "categories": ["Sauce"], 
+            "origins": ["Indian"], 
+            "tags": ["Spicy"],
+            "variations": ["Fish", "Chicken", "Beef", "Lamb", "Goat", "Shellfish", "Vegetable", "Vegetarian", "Vegan"]
+        },
+        {
+            "name": "Pizza",  
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Pizza",
+            "categories": ["Dough"], 
+            "origins": ["Italian"], 
+            "tags": ["Tomato Sauce", "Cheese"],
+            "variations": ["Calzone", "Stromboli", "Deep Dish", "Neopolitan", "Sicilian", "Greek", "Stuffed Crust", "Thin Crust"]
+        },
+        {
+            "name": "Pad Thai",  
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Pad_thai",
+            "categories": ["Noodles"], 
+            "origins": ["Thai"], 
+            "tags": ["Rice Noodles", "Stir-fry"],
+            "variations": []
+        },
+        {
+            "name": "Burger", 
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Hamburger",
+            "categories": ["Sandwich"], 
+            "origins": ["American", "German"], 
+            "tags": ["Ground Meat"],
+            "variations": ["Beef", "Turkey", "Bison", "Veggie"]
+        },
+        {
+            "name": "Chili", 
+            "source": "wikipedia",
+            "description": "https://en.wikipedia.org/wiki/Chili_con_carne",
+            "categories": ["Stew"], 
+            "origins": ["American", "Mexican"], 
+            "tags": ["Slow Cooker", "Spicy"],
+            "variations": ["Beef", "Chicken", "Turkey", "Vegetarian", "Vegan"]
         },
         {
             "name": "", 
-            "wikipedia": "",
+            "source": "",
+            "description": "",
             "categories": [""], 
             "origins": [""], 
-            "tags": [""] 
+            "tags": [""],
+            "variations": [""]
+        },
+        {
+            "name": "", 
+            "source": "",
+            "description": "",
+            "categories": [""], 
+            "origins": [""], 
+            "tags": [""],
+            "variations": [""]
+        },
+        {
+            "name": "", 
+            "source": "",
+            "description": "",
+            "categories": [""], 
+            "origins": [""], 
+            "tags": [""],
+            "variations": [""]
         }
     ]
 }
