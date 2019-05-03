@@ -246,7 +246,41 @@ function toggleFilter(el) {
 
 }
 
-// custom alert function
+
+// toggle oversized description
+function toggleOversizedDescription() {
+
+    let descriptionContainer = document.getElementById("result-description");
+    let descriptionContainerCover = document.getElementById("result-description-cover");
+    descriptionContainer.style.removeProperty("height");
+    descriptionContainerHeight = descriptionContainer.offsetHeight;
+
+    console.log(descriptionContainerHeight);
+    if ( descriptionContainerHeight > 200 ) {
+
+        descriptionContainer.style.height = "200px";
+        descriptionContainerCover.style.display = "block";
+
+    } else {
+
+        descriptionContainerCover.style.display = "none";
+
+    }
+
+}
+
+// toggle full description
+function toggleFullDescription() {
+
+    let descriptionContainer = document.getElementById("result-description");
+    let descriptionContainerCover = document.getElementById("result-description-cover");
+
+    descriptionContainer.style.height = descriptionContainerHeight + "px";
+    descriptionContainerCover.style.display = "none";
+
+}
+
+// custom alert
 function c_alert(title, msg) {
 
     // check for existing alert element and remove it
@@ -355,8 +389,8 @@ function getMeal() {
     if ( possibleMeals.length === 0 ) {
 
         resultName.innerText = "Just Order Takeout";
-        resultDescription.innerHTML = "<p>No meals were found using those particular filters :(</p><p>Try opening up your search a bit or <a href='https://github.com/shnibble/SomethingToCook#contributing' target='_BLANK'>contribute</a> more recipes to the repository.</p>";
-        resultSource.innerHTML = "<p>None</p>";
+        resultDescription.innerHTML = "<p>No meals were found using those particular filters :(</p><br><p>Try opening up your search a bit or <a href='https://github.com/shnibble/SomethingToCook' target='_BLANK'>contribute</a> more recipes to the repository.</p>";
+        resultSource.innerHTML = "<span>None</span>";
 
     } else {
 
@@ -386,6 +420,9 @@ function getMeal() {
                 let key = Object.keys(json.query.pages)[0];
                 let extract = json.query.pages[key].extract;
                 resultDescription.innerHTML = `<p>${extract}</p>`;
+                
+                // check description height and apply cover if needed
+                toggleOversizedDescription();
 
             })
             .catch(error => {
@@ -408,8 +445,10 @@ function getMeal() {
 
             resultDescription.innerHTML = theFinalMeal.description;
             resultSource.innerHTML = `<p>${theFinalMeal.source}</p>`;
+            toggleOversizedDescription();
 
         }
+
         
         // populate final meal search query
         let l = document.createElement("a");

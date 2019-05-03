@@ -147,25 +147,56 @@
             margin: -10px -10px 10px -10px;
             padding: 10px;
         }
+        #result-description-container {
+            position: relative;
+        }
         #result-description {
             margin-top: 10px;
-            height: 200px;
-            overflow-y: auto;
+            overflow-y: hidden;
             text-align: justify;
         }
         #result-description p {
             color: #000;            
+        }
+        #result-description-cover {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: -10px;
+            right: -10px;
+            height: 75px;
+            background: rgba(225,225,225,0.95);
+            background: linear-gradient(rgba(225,225,225,0), rgba(225,225,225,0.75), #fff);
+        }
+        #toggle-description-btn {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: #f88000;
+            padding: 10px;
+            cursor: pointer;
+            transition: color .25s;
+        }
+        #toggle-description-btn:hover, #toggle-description-btn:focus {
+            color: #000;
+            outline: none;
         }
         #result-source {
             text-align: center;
             color: #0099cc;     
         }
         #result-source a {
-            color: #0099cc;
+            color: #f88000;
             transition: color .25s;
         }  
         #result-source a:hover, #result-source a:focus  {
-            color: #000; 
+            outline: none;
+            color: #000;
         }  
         #result-source:before {
             content: 'Source: ';
@@ -305,11 +336,16 @@
 
         <div id="result-container">
             <div id="result">
-                <h2 id="result-name">Chili</h2>
-                <div id="result-description">                    
-                    <p>Chili con carne or chilli con carne (/ˈtʃili koŋ ˈkaɾne/), meaning "chili with meat" and sometimes known as simply "chili" or "chilli", is a spicy stew containing chili peppers, meat (usually beef), and often tomatoes and beans. Other seasonings may include garlic, onions, and cumin. Geographic and personal tastes involve different types of meat and ingredients. Recipes provoke disputes among aficionados, some of whom insist that the word "chili" applies only to the basic dish, without beans and tomatoes. Chili con carne is a frequent dish for cook-offs and is used as an ingredient in other dishes.</p>
+                <h2 id="result-name"></h2>
+                <div id="result-description-container">
+                    <div id="result-description">
+
+                    </div>
+                    <div id="result-description-cover">
+                        <button id="toggle-description-btn" title="Toggle full description." onclick="toggleFullDescription()">Read More</button>
+                    </div>
                 </div>
-                <h3 id="result-source"><a href="https://en.wikipedia.org/wiki/Chili_con_carne" target="_BLANK">Wikipedia</a></h3>
+                <h3 id="result-source"><</h3>
                 <div id="result-search-container">
                     <div id="result-search"></div>
                     <div id="result-search-variations-container">
@@ -336,7 +372,8 @@
             originsFilter = [], 
             tagsFilter = [],
             data = {},
-            meals = {};
+            meals = {},
+            descriptionContainerHeight = 0;
 
         get("/src/data.json").then(function(resolve){
 
