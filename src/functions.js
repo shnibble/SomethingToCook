@@ -1,14 +1,9 @@
 "USE STRICT";
 
-function addPlaceholderListElements (htmlObject, startingNumberOfElements, mustBeDivisibleBy) {
-    
-    if ( startingNumberOfElements % mustBeDivisibleBy !== 0 ) {
-
-        for ( let numberOfElements = startingNumberOfElements; numberOfElements % mustBeDivisibleBy !== 0; numberOfElements++ ) {
-        
-            htmlObject += `<li class="placeholder"></li>`; 
-    
-        }
+function addPlaceholderListElements (htmlObject) {
+ 
+    for (let i = 0; i < 4; i++ ) {
+        htmlObject += `<li class="placeholder"></li>`; 
 
     }
 
@@ -119,7 +114,7 @@ function buildDOM(data) {
         categoriesHTML += `<li class="active" data-type="categories" tabIndex="0">${data.categories[i]}</li>`;
         
     }
-    categoriesContainer.children[2].innerHTML = addPlaceholderListElements(categoriesHTML, data.categories.length, 5);
+    categoriesContainer.children[2].innerHTML = addPlaceholderListElements(categoriesHTML);
 
     // build origins
     for ( let i = 0; i < data.origins.length; i++ ) {
@@ -127,7 +122,7 @@ function buildDOM(data) {
         originsHTML += `<li class="active" data-type="origins" tabIndex="0">${data.origins[i]}</li>`;
 
     }
-    originsContainer.children[2].innerHTML = addPlaceholderListElements(originsHTML, data.origins.length, 5);
+    originsContainer.children[2].innerHTML = addPlaceholderListElements(originsHTML);
 
     // build tags
     for ( let i = 0; i < data.tags.length; i++ ) {
@@ -135,7 +130,7 @@ function buildDOM(data) {
         tagsHTML += `<li data-type="tags" tabIndex="0">${data.tags[i]}</li>`;
 
     }
-    tagsContainer.children[2].innerHTML = addPlaceholderListElements(tagsHTML, data.tags.length, 5);
+    tagsContainer.children[2].innerHTML = addPlaceholderListElements(tagsHTML);
 
 }
 
