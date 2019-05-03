@@ -1,5 +1,56 @@
 "USE STRICT";
 
+// slide down animation
+function slideDown(el, time) {
+
+    let overflow = el.style.overflow;
+
+    el.style.opacity = 0;
+    el.style.display = "block";
+
+    let h = 0;
+    let height = parseInt(window.getComputedStyle(el, null).getPropertyValue('height'));
+    let heightRate = (height / time * 10);
+    el.style.height = 0;
+
+    let pt = 0;
+    let paddingTop = parseInt(window.getComputedStyle(el, null).getPropertyValue('padding-top'));
+    let paddingTopRate = (paddingTop / time * 10);
+    el.style.paddingTop = 0;
+
+    let pb = 0;
+    let paddingBottom = parseInt(window.getComputedStyle(el, null).getPropertyValue('padding-bottom'));
+    let paddingBottomRate = (paddingBottom / time * 10);
+    el.style.paddingBottom = 0;
+    
+    el.style.opacity = 1;
+    el.style.overflow = "hidden";
+
+    let loop = setInterval(function(){
+
+        h += heightRate;
+        pt += paddingTopRate;
+        pb += paddingBottomRate;
+        
+        if (h >= height) {
+
+            el.style.overflow = overflow;
+            el.style.height = null;
+            el.style.paddingTop = paddingTop + "px";
+            el.style.paddingBottom = paddingBottom + "px";
+            clearInterval(loop);
+
+        } else {
+
+            el.style.height = h + "px";
+            el.style.paddingTop = pt + "px";
+            el.style.paddingBottom = pb + "px";
+
+        }
+    }, 1)
+}
+
+// add placeholders
 function addPlaceholderListElements (htmlObject) {
  
     for (let i = 0; i < 4; i++ ) {
@@ -10,8 +61,6 @@ function addPlaceholderListElements (htmlObject) {
     return htmlObject;
 
 }
-
-
 
 // check if two arrays have at least one matching value between them
 function arrayContains(arr1, arr2) {
@@ -38,6 +87,28 @@ function arrayContainsArray(superset, subset) {
         return (superset.indexOf(value) >= 0);
 
     });
+}
+
+// filter tags by input string
+function filterTagsByString(filter) {
+
+    filter = filter.toLowerCase();
+    let tags = document.getElementById("tags-ul").children;
+
+    for ( let i = 0; i < tags.length; i++ ) {
+
+        if ( tags[i].classList.contains("active") || tags[i].innerText.toLowerCase().indexOf(filter) !== -1 ) {
+
+            tags[i].style.display = "inline-block";
+
+        } else {
+
+            tags[i].style.display = "none";
+
+        }
+
+
+    }
 }
 
 // get method for filtering tags

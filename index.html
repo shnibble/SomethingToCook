@@ -11,7 +11,6 @@
     <meta property="og:url" content="http://somethingtocook.com/">
     <meta property="og:type" content="website"/>
     <title>Something to Cook</title>
-    <script src="/src/animation.js"></script>
 
     <style>
         * {
@@ -82,7 +81,7 @@
         #filter-tags div {
             margin: 5px 0;
         }
-        #filter-tags div input {
+        #filter-tags div input[type="radio"] {
             display: none;
         }
         #filter-tags div input + label {
@@ -102,6 +101,19 @@
         #filter-tags div input + label:focus, #filter-tags div input + label:hover {            
             color: #fff;
             outline: none;
+        }
+        #filter-tags-search {
+            display: block;
+            border: none;
+            border-radius: 1px;
+            padding: 15px;
+            width: 200px;
+            margin: 12px auto 0 auto;
+            background: #f2f2f2;
+            text-align: center;
+        }
+        #filter-tags-search:hover, #filter-tags-search:focus {
+            outline: 2px solid #f88000;
         }
 
         #cook-something-container {
@@ -333,8 +345,9 @@
                     <input id="tags-method-2-btn" type="radio" name="tags-method" value="all">
                         <label id="tags-method-2-label" for="tags-method-2-btn" tabIndex="0">all</label>
                     <span> of these tags.</span>
+                    <input id="filter-tags-search" type="text" placeholder="Search for tags" oninput="filterTagsByString(this.value);"></input>
                 </div>
-                <ul>
+                <ul id="tags-ul">
                     Loading...
                 </ul>
             </div>
@@ -378,6 +391,7 @@
     <script>
         "USE STRICT";
 
+        // declare page variables
         let categoriesFilter = [], 
             originsFilter = [], 
             tagsFilter = [],
@@ -385,6 +399,7 @@
             meals = {},
             descriptionContainerHeight = 0;
 
+        // retrieve data from data.json file
         get("/src/data.json").then(function(resolve){
 
             data = JSON.parse(resolve);
@@ -402,6 +417,7 @@
 
         })
 
+        // window scroll listener for sticky button
         window.addEventListener("scroll", function() {
 
             let button = document.getElementById("cook-something-container");
