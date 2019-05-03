@@ -259,6 +259,24 @@ function applyListeners() {
         }
 
     })
+
+    // add window scroll listener for sticky button
+    window.addEventListener("scroll", function() {
+
+        let button = document.getElementById("cook-something-container");
+        let buttonTop = button.offsetTop;
+        let windowTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+        if ( windowTop >= buttonTop ) {
+
+            button.classList.add("sticky");
+
+        } else {
+
+            button.classList.remove("sticky");
+
+        }
+    })
 }
 
 // toggle filter
@@ -456,6 +474,7 @@ function getMeal() {
         resultName.innerText = "Just Order Takeout";
         resultDescription.innerHTML = "<p>No meals were found using those particular filters :(</p><br><p>Try opening up your search a bit or <a href='https://github.com/shnibble/SomethingToCook' target='_BLANK'>contribute</a> more recipes to the repository.</p>";
         resultSource.innerHTML = "<span>None</span>";
+        toggleOversizedDescription();
 
     } else {
 
