@@ -107,6 +107,17 @@
             outline: none;
         }
 
+        #cook-something-container {
+            min-height: 62px;
+        }
+        #cook-something-container.sticky button {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 0.8;
+            padding: 10px;
+        }
         #cook-something-btn {
             display: block;
             background: #f88000;
@@ -117,7 +128,7 @@
             padding: 15px;
             width: 100%;
             max-width: 580px;
-            margin: 10px auto;
+            margin: auto;
             font-size: 28px;
             cursor: pointer;
             transition: background-color .25s, color .25s;
@@ -332,7 +343,9 @@
             </div>
         </div>
 
-        <button id="cook-something-btn" title="Find a meal!" onclick="getMeal()">Cook Something</button>
+        <div id="cook-something-container">
+            <button id="cook-something-btn" title="Find a meal!" onclick="getMeal()">Cook Something</button>
+        </div>
 
         <div id="result-container">
             <div id="result">
@@ -390,6 +403,23 @@
 
             c_alert("Error", error);
 
+        })
+
+        window.addEventListener("scroll", function() {
+
+            let button = document.getElementById("cook-something-container");
+            let buttonTop = button.offsetTop;
+            let windowTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+            if ( windowTop >= buttonTop ) {
+
+                button.classList.add("sticky");
+
+            } else {
+
+                button.classList.remove("sticky");
+
+            }
         })
     </script>
 </body>

@@ -255,7 +255,6 @@ function toggleOversizedDescription() {
     descriptionContainer.style.removeProperty("height");
     descriptionContainerHeight = descriptionContainer.offsetHeight;
 
-    console.log(descriptionContainerHeight);
     if ( descriptionContainerHeight > 200 ) {
 
         descriptionContainer.style.height = "200px";
