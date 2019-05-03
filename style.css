@@ -87,18 +87,37 @@ main {
     color: #fff;
     outline: none;
 }
+#filter-tags div form {
+    padding: 10px;
+}
 #filter-tags-search {
-    display: block;
-    border: none;
+    display: inline-block;
+    vertical-align: top;
+    border: 2px solid #f88000;
     border-radius: 1px;
-    padding: 15px;
+    padding: 13px;
     width: 200px;
-    margin: 12px auto 0 auto;
-    background: #f2f2f2;
+    background-color: #f2f2f2;
     text-align: center;
 }
 #filter-tags-search:hover, #filter-tags-search:focus {
-    outline: 2px solid #f88000;
+    outline: none;
+}
+#filter-tags-search-reset-btn {
+    display: inline-block;
+    vertical-align: top;
+    padding: 15px;
+    background-color: #f88000;
+    border: none;
+    border-radius: 1px;
+    font-size: 32px;
+    line-height: 15px;
+    cursor: pointer;
+    transition: color .25s;
+}
+#filter-tags-search-reset-btn:hover, #filter-tags-search-reset-btn:focus {
+    outline: none;
+    color: #fff;
 }
 
 #cook-something-container {
@@ -113,7 +132,7 @@ main {
     padding: 10px;
 }
 #cook-something-btn {
-    display: block;
+    display: inline-block;
     background: #f88000;
     color: #000;
     font-weight: bold;
@@ -131,6 +150,7 @@ main {
     color: #fff;
     outline: none;
 }
+
 
 #result-container {
     min-height: 800px;
